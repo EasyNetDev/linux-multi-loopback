@@ -365,7 +365,7 @@ static const struct net_device_ops lo_netdev_ops = {
 	.ndo_init		= lo_dev_init,
 	.ndo_uninit		= lo_dev_uninit,
 	.ndo_start_xmit		= lo_xmit,
-	.ndo_validate_addr	= eth_validate_addr,
+//	.ndo_validate_addr	= eth_validate_addr,
 	.ndo_set_rx_mode	= set_multicast_list,
 	.ndo_set_mac_address	= eth_mac_addr,
 	.ndo_get_stats64	= lo_get_stats64,
@@ -400,29 +400,35 @@ static void lo_setup(struct net_device *dev)
 	dev->needs_free_netdev = true;
 
 	/* Fill in device structure with ethernet-generic values. */
-	dev->mtu    = (64 * 1024);
-	//dev->type   = ARPHRD_LOOPBACK;
+	dev->hard_header_len	= ETH_HLEN;	/* 14	*/
+	dev->min_header_len	= ETH_HLEN;	/* 14	*/
+	dev->addr_len		= ETH_ALEN;	/* 6	*/
+	dev->type   = ARPHRD_LOOPBACK;
+	eth_zero_addr(dev->broadcast);
 	//dev->flags  = IFF_LOOPBACK;
-	dev->flags  = IFF_NOARP;
-	dev->flags &= ~IFF_MULTICAST;
-
+	dev->flags  = IFF_NOARP;		// Set to no ARP protocol
+	dev->flags &= ~IFF_MULTICAST;		// Disable Multicast
+	//dev->flags |= IFF_UP | IFF_RUNNING;	// Always UP and RUNNING
+	//netif_keep_dst(dev);	// Not sure if is needed
 	dev->priv_flags |= IFF_LIVE_ADDR_CHANGE | IFF_NO_QUEUE;
 
-	dev->features	|= NETIF_F_SG | NETIF_F_FRAGLIST;
+	dev->hw_features = NETIF_F_GSO_SOFTWARE;
+	dev->features	 = NETIF_F_SG | NETIF_F_FRAGLIST;
 	dev->features	|= NETIF_F_GSO_SOFTWARE;
 	dev->features	|= NETIF_F_HW_CSUM | NETIF_F_RXCSUM | NETIF_F_SCTP_CRC;
 	dev->features	|= NETIF_F_HIGHDMA | NETIF_F_LLTX;
-	dev->features	|= NETIF_F_GSO_ENCAP_ALL;
-	//dev->features	|= NETIF_F_NETNS_LOCAL;
-	//dev->features	|= NETIF_F_VLAN_CHALLENGED
+	dev->features	|= NETIF_F_NETNS_LOCAL;
+	dev->features	|= NETIF_F_VLAN_CHALLENGED;
+	//dev->features	|= NETIF_F_GSO_ENCAP_ALL;
 	dev->features	|= NETIF_F_LOOPBACK;
 
 	//dev->hw_features |= dev->features;
 	dev->hw_enc_features |= dev->features;
-	eth_hw_addr_random(dev);
+	//eth_hw_addr_random(dev);
 
-	//dev->min_mtu = 0;
-	//dev->max_mtu = 0;
+	dev->min_mtu = IPV6_MIN_MTU;
+	dev->max_mtu = IP6_MAX_MTU;
+	dev->mtu    = (64 * 1024);
 }
 
 static int lo_validate(struct nlattr *tb[], struct nlattr *data[],
@@ -460,6 +466,8 @@ static int __init lo_init_one(void)
 	err = register_netdevice(dev_lo);
 	if (err < 0)
 		goto err;
+
+	netif_carrier_on(dev_lo);
 	return 0;
 
 err:
