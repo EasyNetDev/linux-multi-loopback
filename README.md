@@ -1,6 +1,6 @@
 # Driver that supports multiple loopbacks in Linux system
 This driver is adding more loopback interfaces in the Linux systems. When you are using your Linux system as a router you will face the necessity to add more loopback interfaces.
-By default Linux offers only one loopback interface, ```lo``. 
+By default Linux offers only one loopback interface, ```lo```. 
 
 When you are adding a new VRF in the system:
 
