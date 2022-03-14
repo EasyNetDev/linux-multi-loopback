@@ -1,0 +1,16 @@
+Source: multi-loopback
+Section: admin
+Priority: optional
+Maintainer: Adrian Ban <devel@abtelecom.ro>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.9.1
+Homepage: https://github.com/EasyNetDev/linux-multi-loopback
+Vcs-Browser: https://github.com/EasyNetDev/linux-multi-loopback
+Vcs-Git: https://github.com/EasyNetDev/linux-multi-loopback.git
+
+Package: multi-loopback-dkms
+Architecture: all
+Depends: ${misc:Depends}, dkms, linux-libc-dev, libc6-dev
+XB-Modaliases: ${modaliases}
+Description: Driver to add additional loopback network interfaces
+ Driver to add additional loopback network interfaces to Linux systems.

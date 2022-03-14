@@ -1,0 +1,8 @@
+multi-loopback (0.9.1) unstable; urgency=medium
+
+  * First public release for this driver
+  * Added DKMS
+  * Added Debian packaging
+
+ -- Adrian Ban <devel@abtelecom.ro>  Mon, 14 Mar 2022 11:21:20 +0200
+

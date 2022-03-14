@@ -1,0 +1,4 @@
+config MULTI_LOOPBACK
+	tristate "Multiple loopback network interfaces support for Linux"
+	help
+	  This adds multiple loopback network interfaces to be used also under VRF.

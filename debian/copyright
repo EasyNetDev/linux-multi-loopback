@@ -1,0 +1,16 @@
+This package was debianized by Adrian Ban <devel@abtelecom.ro>  on  Mon, 14 Mar 2022 13:14:20 +0200
+
+Upstream Author(s): 
+	EasyNet Consulting SRL, http://www.easynet.dev
+
+Downloaded from:
+	https://github.com/EasyNetDev/linux-multi-loopback/archive/refs/heads/main.zip
+
+Copyright:
+	Copyright (C) 2022 EasyNet Consulting SRL, Romania
+
+License:
+	GPLv2
+
+The Debian packaging is (C) 2013, Canonical Ltd and is licensed
+under the GPL 2 or later, see `/usr/share/common-licenses/GPL-2'.

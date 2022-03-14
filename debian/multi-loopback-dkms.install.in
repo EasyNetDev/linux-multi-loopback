@@ -1,0 +1,4 @@
+README.md		usr/src/#PKG_NAME#-#VERSION#/
+*.c			usr/src/#PKG_NAME#-#VERSION#/
+Makefile		usr/src/#PKG_NAME#-#VERSION#/
+debian/dkms.conf	usr/src/#PKG_NAME#-#VERSION#/

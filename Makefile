@@ -5,7 +5,7 @@
 ifneq ($(KERNELRELEASE),)
 # call from kernel build system
 
-obj-$(CONFIG_LO) += lo.o
+obj-$(CONFIG_MULTI_LOOPBACK) += lo.o
 
 #lo-objs := lo.o
 
@@ -28,7 +28,7 @@ MDIR	?= /lib/modules/$(shell uname -r)
 PWD	:= $(shell pwd)
 PWD	:= $(shell pwd)
 
-export CONFIG_LO := m
+export CONFIG_MULTI_LOOPBACK := m
 
 all:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
@@ -42,11 +42,11 @@ help:
 install: lo.ko
 	rm -f ${MDIR}/drivers/net/lo.ko
 	install -m644 -b -D lo.ko ${MDIR}/drivers/net/lo.ko
-	depmod -aq
+	depmod -a
 
 uninstall:
 	rm -rf ${MDIR}/drivers/net/lo.ko
-	depmod -aq
+	depmod -a
 
 endif
 
