@@ -12,7 +12,7 @@ It will create an interface called ```VPN``` and it can be used as loopback for 
 
 But there are situations that you need one or more loopbacks in the default VRF of in other VRF. For example is a loopback for OSPF and another loopback to be used in BGP connections or just to be used as a route test distribution or to bind some services like SSH on that loopback.
 
-The ```dummy``` driver can be used as an addtional loopback, but is failing if you are using it as a source or if you are trying to ping the IP of the dummy interface which resides in a VRF.
+The ```dummy``` driver can be used as an addtional loopback, but is failing if you are using it as a source or if you are trying to ping the IP of the dummy interface which resides in a VRF. This is the drawnback of ```dummy``` interface, because it doesn't have a proper ```xmit``` function. It is just dropping the packets.
 
 Let's take this example:
 
@@ -178,7 +178,7 @@ PING 10.2.0.1 (10.2.0.1) from 10.0.0.2 : 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.049/0.049/0.049/0.000 ms
 ```
 
-But if I'm trying to ping from the ```dummy``` interface in VRF from anything in default VRF not working anymore:
+But if I'm trying to ping from the ```dummy``` interface in VRF from anywere in default VRF not working anymore:
 ```
 # ping -c 1 10.2.0.2 -I 10.0.0.1 -w 1
 PING 10.2.0.2 (10.2.0.2) from 10.0.0.1 : 56(84) bytes of data.
