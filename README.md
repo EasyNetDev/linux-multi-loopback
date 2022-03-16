@@ -232,6 +232,8 @@ make
 insmod lo.ko numloopbacks=4
 ```
 
+Or you can use my modified ```iproute2``` https://github.com/EasyNetDev/iproute2 to add dynamically loopbacks interfaces like ```dummy``` ones.
+
 You will have 4 loopbacks called lo0, lo1, lo2 and lo3:
 ```
 26: lo0: <NOARP,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
