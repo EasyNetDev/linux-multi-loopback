@@ -8,7 +8,7 @@ When you are adding a new VRF in the system:
 ip link add VPN type vrf table 2
 ```
 
-It will create an interface called ```VPN``` and it can be used as loopback for that VRF. Then you can bind interfaces under this VRF and all the traffic will be forwarded into ```table 10```.
+It will create an interface called ```VPN``` and it can be used as loopback for that VRF. Then you can bind interfaces under this VRF and all the traffic will be forwarded into ```table 2```.
 
 But there are situations that you need one or more loopbacks in the default VRF of in other VRF. For example is a loopback for OSPF and another loopback to be used in BGP connections or just to be used as a route test distribution or to bind some services like SSH on that loopback.
 
