@@ -1,3 +1,13 @@
+multi-loopback (0.9.2) unstable; urgency=medium
+
+  * Rewrite the code based on dummy and add xmit() from vrf.c
+  * Updated the code for Kernel >= 5.18.0
+  * const struct pcpu_dstats is missing in netdevice.h in Kernels < 6.6.0
+  * const struct pcpu_dstats for Kernel < 6.6.0 is compatible with ones in Kernels >= 6.6.0
+
+ -- Adrian Ban <devel@easynet.dev>  Thu, 25 Jan 2024 23:33:20 +0200
+
+
 multi-loopback (0.9.1) unstable; urgency=medium
 
   * First public release for this driver
