@@ -36,7 +36,7 @@
 #define DRV_NAME	"lo"
 #define DRV_VERSION	"0.9.2"
 
-static int numlos = 1;
+static int numlos = 0;
 
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 18, 0)
 #error "This driver can be compiled on Kernel >= 5.18.0. Below this version, use repository 5.17.x."
@@ -406,6 +406,8 @@ static void lo_setup(struct net_device *dev)
 	dev->priv_flags |= IFF_LIVE_ADDR_CHANGE | IFF_NO_QUEUE;
 
 	/* VRF based features */
+	/* Keep the interface operational UP */
+	dev->operstate = IF_OPER_UP;
 	/* don't acquire lo device's netif_tx_lock when transmitting */
 	dev->features |= NETIF_F_LLTX;
 
