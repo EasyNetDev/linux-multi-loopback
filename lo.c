@@ -402,6 +402,7 @@ static void lo_setup(struct net_device *dev)
 	dev->type   = ARPHRD_LOOPBACK;
 	eth_zero_addr(dev->broadcast);		// No bradcast
 	dev->flags |= IFF_NOARP;		// Set to no ARP protocol
+	dev->flags |= IFF_LOOPBACK;
 	dev->flags &= ~IFF_MULTICAST;		// Disable Multicast
 	dev->priv_flags |= IFF_LIVE_ADDR_CHANGE | IFF_NO_QUEUE;
 
